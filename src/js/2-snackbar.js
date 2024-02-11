@@ -1,43 +1,52 @@
-`use strict`;
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
-const formRef = document.querySelector('form');
+const form = document.querySelector('.form');
+const delayContainer = document.querySelector('input[name="delay"]');
+const promiseStateSelector = document.querySelectorAll('input[name="state"]');
 
-formRef.addEventListener('submit', ev => {
-    ev.preventDefault();
-    const delay = parseInt(formRef.elements.delay.value);
-    const state = formRef.elements.state.value;
-
-    function createPromise(delay, isValid) {
-        const promise = new Promise((resolve, reject) => {
-            setTimeout(() => {
-                if (isValid) {
-                    resolve(delay);
-                } else {
-                    reject(delay);
-                }
-            }, delay);
-        });
-        return promise;
+function getPromiseState(promiseStateSelector) {
+  for (let i = 0; i < promiseStateSelector.length; i++) {
+    if (promiseStateSelector[i].checked) {
+      return promiseStateSelector[i].value;
     }
+  }
+}
 
-    const isActive = Math.random() > 0.5;
-    const promise = createPromise(delay, state === 'fulfilled');
-    promise.then(onFullFiled). catch(onRejected);
+function createPromise(delay, promiseStatus) {
+  const promise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (promiseStatus === 'fulfilled') {
+        resolve(delay);
+      } else {
+        reject(delay);
+      }
+    }, delay);
+  });
+  return promise;
+}
 
-
-    function onFullFiled(delay) {
-        iziToast.success({
-            title: `✅ Fulfilled promise in ${delay}ms`,
-            message: `Promise resolved successfully!`,
-        });
-    }
-
-    function onRejected(delay) {
-        iziToast.error({
-            title: `❌ Rejected promise in ${delay}ms`,
-            message: `Promise rejected!`,
-        });
-    };
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  let promise = createPromise(
+    delayContainer.value,
+    getPromiseState(promiseStateSelector)
+  );
+  promise
+    .then(value => {
+      iziToast.success({
+        message: `Fulfilled promise in ${value}ms`,
+        position: 'topRight',
+        transitionIn: 'fadeIn',
+        progressBar: false,
+      });
+    })
+    .catch(value => {
+      iziToast.error({
+        message: `Rejected promise in ${value}ms`,
+        position: 'topRight',
+        transitionIn: 'fadeIn',
+        progressBar: false,
+      });
+    });
 });
