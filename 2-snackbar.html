@@ -1,44 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SNACKBAR</title>
     
-  <script type="module" crossorigin src="/goit-js-hw-10/commonHelpers2.js"></script>
-  <link rel="modulepreload" crossorigin href="/goit-js-hw-10/assets/style-249b8bd7.js">
-  <link rel="modulepreload" crossorigin href="/goit-js-hw-10/assets/vendor-77e16229.js">
-  <link rel="stylesheet" href="/goit-js-hw-10/assets/style-4c3ce3d5.css">
-  <link rel="stylesheet" href="/goit-js-hw-10/assets/vendor-7a007824.css">
-</head>
-<body>
-    <section>
-        <a href="./index.html">Go to home</a>
-        <h1>Welcome</h1>
-    </section>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <script type="module" crossorigin src="/goit-js-hw-10/commonHelpers2.js"></script>
+    <link rel="modulepreload" crossorigin href="/goit-js-hw-10/assets/modulepreload-polyfill-3cfb730f.js">
+    <link rel="modulepreload" crossorigin href="/goit-js-hw-10/assets/vendor-77e16229.js">
+    <link rel="stylesheet" href="/goit-js-hw-10/assets/vendor-7a007824.css">
+    <link rel="stylesheet" href="/goit-js-hw-10/assets/styles-0547da5e.css">
+  </head>
+  <body>
     <form class="form">
-    <label>
-    Delay (ms)
-    <input type="number" name="delay" required />
-    </label>
+      <label for="delay">Delay (ms) </label>
+
+      <input type="number" name="delay" required />
+
+      <fieldset>
+        <legend>State</legend>
+        <label>
+          <input type="radio" name="state" value="fulfilled" required />
+          Fulfilled
+        </label>
+        <label>
+          <input type="radio" name="state" value="rejected" required />
+          Rejected
+        </label>
+      </fieldset>
+
+      <button type="submit">Create notification</button>
+    </form>
+    <a href="index.html">BACK</a>
     
-    <fieldset>
-    <legend>State</legend>
-    <label>
-        <input type="radio" name="state" value="fulfilled" required />
-        Fulfilled
-    </label>
-    <label>
-        <input type="radio" name="state" value="rejected" required />
-        Rejected
-    </label>
-    </fieldset>
-
-    <button type="submit">Create notification</button>
-</form>
-
-
-    
-</body>
+  </body>
 </html>
